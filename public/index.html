@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">₹</div>
+            <div>
+                <h2>Smart Expense</h2>
+                <span>Tracker</span>
+            </div>
+        </div>
+
+        <nav class="navigation">
+            <a class="nav-link active" href="#dashboard">
+                <span>⌂</span> Dashboard
+            </a>
+            <a class="nav-link" href="#transactions">
+                <span>☷</span> Transactions
+            </a>
+            <a class="nav-link" href="#add-transaction">
+                <span>＋</span> Add Transaction
+            </a>
+            <a class="nav-link" href="#reports">
+                <span>▥</span> Reports
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="footer-icon">✦</div>
+            <p>Better spending today,<br>brighter tomorrow!</p>
+        </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content">
+
+        <header class="page-header" id="dashboard">
+            <div>
+                <h1>Smart Expense Tracker</h1>
+                <p>Manage your income and expenses easily.</p>
+            </div>
+            <div class="today-date">
+                <span>▦</span>
+                <span id="current-date"></span>
+            </div>
+        </header>
+
+        <!-- Summary cards -->
+        <section class="summary-grid">
+
+            <article class="summary-card income-card">
+                <div class="summary-icon">↑</div>
+                <div class="summary-info">
+                    <h3>Total Income</h3>
+                    <p id="total-income">₹0.00</p>
+                    <span>All recorded income</span>
+                </div>
+                <div class="trend-icon">↗</div>
+            </article>
+
+            <article class="summary-card expense-card">
+                <div class="summary-icon">↓</div>
+                <div class="summary-info">
+                    <h3>Total Expenses</h3>
+                    <p id="total-expenses">₹0.00</p>
+                    <span>All recorded expenses</span>
+                </div>
+                <div class="trend-icon">↗</div>
+            </article>
+
+            <article class="summary-card balance-card">
+                <div class="summary-icon">₹</div>
+                <div class="summary-info">
+                    <h3>Balance</h3>
+                    <p id="balance">₹0.00</p>
+                    <span>Your current balance</span>
+                </div>
+                <div class="trend-icon">↗</div>
+            </article>
+
+        </section>
+
+        <!-- Charts -->
+        <section class="charts-grid">
+
+            <article class="panel">
+                <div class="panel-heading">
+                    <h2>Income vs Expenses</h2>
+                    <div class="legend">
+                        <span><i class="legend-dot green"></i>Income</span>
+                        <span><i class="legend-dot red"></i>Expenses</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <svg id="monthly-chart"
+                         viewBox="0 0 600 235"
+                         role="img"
+                         aria-label="Monthly income and expenses chart">
+                    </svg>
+                </div>
+            </article>
+
+            <article class="panel">
+                <div class="panel-heading">
+                    <h2>Expense Breakdown</h2>
+                </div>
+
+                <div class="breakdown-content">
+                    <div class="donut-wrap">
+                        <div id="expense-donut" class="donut">
+                            <div class="donut-center">
+                                <strong id="donut-total">₹0.00</strong>
+                                <span>Total Expenses</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="category-legend" class="category-legend"></div>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Add transaction and report -->
+        <section class="work-grid">
+
+            <article class="panel form-panel" id="add-transaction">
+                <div class="section-title">
+                    <span class="title-icon">＋</span>
+                    <h2>Add Transaction</h2>
+                </div>
+
+                <form id="transaction-form">
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="type">Transaction Type</label>
+                            <select id="type" name="type" required>
+                                <option value="EXPENSE">Expense</option>
+                                <option value="INCOME">Income</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amount">Amount (₹)</label>
+                            <input
+                                type="number"
+                                id="amount"
+                                name="amount"
+                                min="0.01"
+                                step="0.01"
+                                placeholder="Enter amount"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <input
+                                type="text"
+                                id="category"
+                                name="category"
+                                maxlength="100"
+                                placeholder="e.g. Food, Travel, Salary"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input
+                                type="text"
+                                id="description"
+                                name="description"
+                                maxlength="200"
+                                placeholder="e.g. Lunch and snacks"
+                                required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="primary-button">
+                        <span>＋</span> Add Transaction
+                    </button>
+
+                    <p id="message" class="message" role="status"
+                       aria-live="polite">
+                        Fill in the details to add a transaction.
+                    </p>
+                </form>
+            </article>
+
+            <article class="panel report-panel" id="reports">
+                <div class="section-title">
+                    <span class="title-icon purple">▤</span>
+                    <h2>Financial Report</h2>
+                </div>
+
+                <p class="report-description">
+                    Get a summary of your income, expenses and savings.
+                </p>
+
+                <button type="button" id="generate-report"
+                        class="report-button">
+                    ▥ &nbsp; Generate Report
+                </button>
+
+                <div class="report-output-box">
+                    <h3>Report Output</h3>
+                    <pre id="report-output">Click "Generate Report" to view your report.</pre>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Transaction history -->
+        <section class="panel history-panel" id="transactions">
+
+            <div class="panel-heading history-heading">
+                <div class="section-title">
+                    <span class="history-icon">◷</span>
+                    <h2>Transaction History</h2>
+                </div>
+                <span class="record-count" id="record-count">0 records</span>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th class="amount-column">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transaction-list">
+                        <tr>
+                            <td colspan="5" class="empty-state">
+                                Loading transactions...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <footer class="page-footer">
+            Smart Expense Tracker <span>•</span>
+            Built with Java, HTML, CSS and JavaScript
+            <span class="heart">♥</span>
+        </footer>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
